@@ -178,28 +178,28 @@ async function reycloudstart() {
                 let reason = new Boom(lastDisconnect?.error)?.output.statusCode
                 if (reason === DisconnectReason.badSession) {
                     console.log(`Sesi rusak.. Mohon hapus folder cloudsesi`);
-                    hydroInd()
+                    reycloudstart()
                 } else if (reason === DisconnectReason.connectionClosed) {
                     console.log("Koneksi terputus, menghubungkan ulang..");
-                    hydroInd();
+                    reycloudstart();
                 } else if (reason === DisconnectReason.connectionLost) {
                     console.log("Koneksi terputus dari server, menghubungkan ulang..");
-                    hydroInd();
+                    reycloudstart();
                 } else if (reason === DisconnectReason.connectionReplaced) {
                     console.log("Koneksi bertabrakan.. mohon matikan sesi yang sedang bejalan");
-                    hydroInd()
+                    reycloudstart()
                 } else if (reason === DisconnectReason.loggedOut) {
                     console.log(`Sesi terputus.. Mohon hapus folder furina`);
-                    hydroInd();
+                    reycloudstart();
                 } else if (reason === DisconnectReason.restartRequired) {
                     console.log("Membutuhkan restart, Merestart..");
-                    hydroInd();
+                    reycloudstart();
                 } else if (reason === DisconnectReason.timedOut) {
                     console.log("Waktu habis.. Menghubungkan ulang");
-                    hydroInd();
+                    reycloudstart();
                 } else {
                     console.log(`Kesalahan tidak diketahui: ${reason}|${connection}`)
-                    hydroInd();
+                    reycloudstart();
                 }
             }
             if (update.connection == "connecting") {
@@ -210,7 +210,7 @@ async function reycloudstart() {
             }
         } catch (err) {
             console.log('Error in Connection.update '+err)
-            hydroInd();
+            reycloudstart();
         }
     })
 
